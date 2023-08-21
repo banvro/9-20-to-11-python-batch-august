@@ -131,7 +131,14 @@ print(xyz(40, 90))
 
 
 
-
+def newfunn(a, b, *args, **kwargs):
+    print(a)
+    print(b)
+    print(args)
+    print(kwargs)
+   
+ 
+newfunn(12, 2, 34, 90, 100, 500, 20, 65, 150, name = "kriss", age = 30, address = "i am address")
 
 
 
