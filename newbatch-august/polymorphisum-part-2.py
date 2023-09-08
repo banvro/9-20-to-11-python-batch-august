@@ -68,6 +68,91 @@ qw()
 
 
 
+# # 10 + 30
+
+# # a + b
+
+# # operends
+
+# # operators : 
+
+# # +, -, *, /
+
+
+# # operatoer overloading : 
+
+
+
+
+# # 10 + 20
+
+# # a = 10
+
+# # b = "20"
+
+# # print(a + b)
+
+
+# class xyz:
+#     def __init__(self, a, b):
+#         self.num1 = a
+#         self.num2 = b
+    
+#     def __add__(x, y):
+#         a = x.num1 + y.num1
+#         b = x.num2 + y.num2
+#         sum = xyz(a, b)
+#         return sum
+    
+# obj = xyz(12, 90)
+# abc = xyz(10, 20)
+
+# zx = obj + abc
+
+# print(zx.num2)
+
+
+
+class xy:
+    def __init__(self, a, b):
+        self.name = a
+        self.age = b
+
+    def save(self):
+        print(self.name, self.age)
+
+obj = xy("moris", 10)
+obj1 = xy("kriss", 20)
+obj2 = xy("tk", 70)
+
+class yz(xy):
+    def __init__(self, a, b, c):
+        super().__init__(a, b)
+        self.phone_number = c
+
+    def save(self):
+        print(self.name, self.age, self.phone_number)
+
+
+newobj = yz("muname", 20, 891263)
+
+newobj.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
