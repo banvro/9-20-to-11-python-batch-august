@@ -19,3 +19,32 @@ help@myapp.travel caters to travelers seeking assistance with travel apps, under
 contact@local-organization.jobs reflects the importance of email in the job application and hiring process.
 
 The convenience and speed of email have transformed the way we interact personally and professionally. Whether you're sending a quick message to a friend or conducting business negotiations, email addresses
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  output is : 
+
+1. John.Doe@example.com
+2. alice_smith1234@gmail.com
+3. info@company.co.uk
+4. support@my-website.io
+5. contact_me@subdomain.example.net
+6. webmaster@another-site.org
+7. marketing@company-name.biz
+8. sales@domain_name.museum
+9. help@myapp.travel
+10. contact@local-organization.jobs 
