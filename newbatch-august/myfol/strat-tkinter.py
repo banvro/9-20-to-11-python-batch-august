@@ -17,6 +17,10 @@ entr.pack(ipadx=20, ipady=10)
 btn = tk.Button(app, text = "Submit", font=("cursive", 10, "bold"))
 btn.pack(pady=20)
 
+ck = tk.Checkbutton()
+# ck = tk.Radiobutton()
+ck.pack()
+
 app.mainloop()
 
 
