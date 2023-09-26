@@ -6,7 +6,7 @@ def savedata():
     en3 = entr3.get()
     print(en1, en2, en3)
 
-    cusers.excute(f"inser into tablename values('{en1}', {en2}, 'xyz@gmail.com')")
+    # cusers.excute(f"inser into tablename values('{en1}', {en2}, 'xyz@gmail.com')")
 
 app = tk.Tk()
 
