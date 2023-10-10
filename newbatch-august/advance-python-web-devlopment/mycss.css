@@ -1,0 +1,22 @@
+.myh1 {
+    text-align: center;
+    background-color: red;
+    color: white;
+    font-family: 'circular';
+    margin-top: 0px;
+    text-shadow: 6px 5px 5px #24e5da;
+}
+
+.mycar{
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+}
+
+.myp{
+    padding-left: 40px;
+padding-right: 40px;
+margin-top: -24px;
+font-size: 11px;
+font-family: 'circular';
+}
