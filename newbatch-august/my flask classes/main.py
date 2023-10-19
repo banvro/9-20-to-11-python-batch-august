@@ -15,5 +15,19 @@ def contactus():
     return render_template("basicfiles/contact.html")
 
 
+@myweb.route("/about")
+def aboutus():
+    return render_template("basicfiles/about.html")
+
+
+
+
 if __name__ == "__main__":
     myweb.run(port=1000, debug = True)
+
+
+
+
+
+
+# jinja2 tamplate engain 
