@@ -8,16 +8,16 @@ myweb = Flask(__name__)
 
 @myweb.route("/")
 def home():
-    return render_template("basicfiles/home.html")
+    return render_template("home.html", data = "this is dta")
 
 @myweb.route("/contact")
 def contactus():
-    return render_template("basicfiles/contact.html")
+    return render_template("contact.html")
 
 
-@myweb.route("/about")
-def aboutus():
-    return render_template("basicfiles/about.html")
+@myweb.route("/about/<int:x>")
+def aboutus(x):
+    return render_template("about.html", data = x)
 
 
 
