@@ -1,4 +1,10 @@
 from flask import Flask, render_template, request
+from flask import redirect
+import mysql.connector
+
+conn = mysql.connector.connect(host="localhost", username = "root", password="1234", database = "amazon")
+curser = conn.cursor()
+
 
 web = Flask(__name__)
 
@@ -26,8 +32,30 @@ def savedata():
         email = request.form.get("email")
         p_number = request.form.get("number")
         message = request.form.get("msg")
+        curser.execute(f"insert into savemydata values('{fname}', '{email}', '{p_number}', '{message}')")
+        conn.commit()
 
-    return f"nmae = {fname} , email = {email} phone number = {p_number} and message = {message}"
+        return redirect("/showdata")
+    
+
+@web.route("/showdata")
+def showdata():
+    curser.execute("select * from savemydata;")
+    data = curser.fetchall()
+    # print(data)
+    return render_template("showdata.html", alldata = data)
 
 if __name__ == "__main__":
     web.run(debug = True)
+
+
+
+
+
+
+
+
+
+
+
+
