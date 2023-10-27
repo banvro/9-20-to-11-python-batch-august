@@ -45,6 +45,14 @@ def showdata():
     # print(data)
     return render_template("showdata.html", alldata = data)
 
+
+@web.route("/deletedata/<x>", methods = ["POST"])
+def deletethis(x):
+    curser.execute(f"delete from savemydata where Name = '{x}'")
+    conn.commit()
+    return redirect("/showdata")
+
+
 if __name__ == "__main__":
     web.run(debug = True)
 

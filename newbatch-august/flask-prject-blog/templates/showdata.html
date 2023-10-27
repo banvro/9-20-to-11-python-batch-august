@@ -2,28 +2,30 @@
 
 {% block body %}
 
-<div style = "padding: 67px;">
-    <div class="row">
-        
-        {% for data in alldata %}
-        <div class="col-sm-6 mb-3 mb-sm-0" style="padding-bottom: 29px;">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Name = {{data[0]}}   </h5>
-              <h5 class="card-title">Number = {{data[2]}}</h5>
-              <h5 class="card-title">Email = {{data[1]}}</h5>
-              <p class="card-text">Message :{{data[3]}}.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+<div style="padding: 67px;">
+  <div class="row">
+    {% for data in alldata %}
+    <div class="col-sm-6 mb-3 mb-sm-0" style="padding-bottom: 29px;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Name = {{data[0]}} </h5>
+          <h5 class="card-title">Number = {{data[2]}}</h5>
+          <h5 class="card-title">Email = {{data[1]}}</h5>
+          <p class="card-text">Message :{{data[3]}}.</p>
+
+          <div style="display: flex; justify-content: space-around;">
+            <button type="submit" class="btn btn-primary">Update</button>
+
+            <form action="/deletedata/{{data[0]}}" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
           </div>
         </div>
-        {% endfor %}
- 
-
       </div>
+    </div>
+    {% endfor %}
+
+  </div>
 </div>
-
-
-
 
 {% endblock body %}
