@@ -53,6 +53,31 @@ def deletethis(x):
     return redirect("/showdata")
 
 
+@web.route("/showupdate/<x>", methods = ["POST"])
+def updatedata(x):
+    curser.execute(f"select * from savemydata where Name = '{x}'")
+    record = curser.fetchone()
+    return render_template("updatedata.html", data = record)
+
+@web.route("/updatenow/<x>", methods = ["POST"])
+def updatenow(x):
+    if request.method == "POST":
+        fname = request.form.get("fullname")
+        # x = request.form["fullname"]
+        email = request.form.get("email")
+        p_number = request.form.get("number")
+        message = request.form.get("msg")
+        curser.execute(f'update savemydata set Name = "{fname}", email = "{email}", Number = "{p_number}", message = "{message}" where Name = "{x}";')
+        conn.commit()
+
+        return redirect("/showdata")
+
+
+
+@web.route("/hlo/<name>")
+def hlo(name):
+    return f"hthis is helo ::::: {name}"
+
 if __name__ == "__main__":
     web.run(debug = True)
 

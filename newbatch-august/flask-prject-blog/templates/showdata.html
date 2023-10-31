@@ -14,7 +14,10 @@
           <p class="card-text">Message :{{data[3]}}.</p>
 
           <div style="display: flex; justify-content: space-around;">
-            <button type="submit" class="btn btn-primary">Update</button>
+
+            <form action="/showupdate/{{data[0]}}" method="post">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
 
             <form action="/deletedata/{{data[0]}}" method="post">
               <button type="submit" class="btn btn-danger">Delete</button>

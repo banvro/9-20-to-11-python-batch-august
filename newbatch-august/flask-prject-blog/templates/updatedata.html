@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div style="padding: 35px; text-align: center;">
+  <h1>Contact Us</h1>
+</div>
+
+
+<form action="/updatenow/{{data[0]}}" method="post">
+
+  <div style="padding-left: 20%; padding-right: 20%;">
+    <div class="form-floating mb-3">
+      <input type="text" value = "{{data[0]}}" class="form-control" id="floatingInput" name="fullname"
+       >
+      <label for="floatingInput">Full Name</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput"
+        placeholder="name@example.com" value = "{{data[1]}}" name="email">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="floatingInput"
+        placeholder="name@example.com" name="number" value = "{{data[2]}}">
+      <label for="floatingInput">Phone Number</label>
+    </div>
+    <div class="form-floating">
+      <textarea class="form-control" name="msg" cols="60" rows="40">{{data[3]}}</textarea>
+      <label for="floatingPassword">Your Message</label>
+    </div>
+
+    <div style="    display: flex;
+  justify-content: center;
+  padding: 21px;">
+      <button type="submit" class="btn btn-success btn-lg">Update</button>
+
+    </div>
+  </div>
+</form>
+
+{% endblock body %}
