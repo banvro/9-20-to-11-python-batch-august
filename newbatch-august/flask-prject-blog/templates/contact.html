@@ -6,7 +6,7 @@
   <h1>Contact Us</h1>
 </div>
 
-<form action="/savedata" method="post">
+<form action="/savedata" method="post" enctype="multipart/form-data">
 
   <div style="padding-left: 20%; padding-right: 20%;">
     <div class="form-floating mb-3">
@@ -27,6 +27,11 @@
     <div class="form-floating">
       <textarea class="form-control" name="msg" cols="60" rows="40"></textarea>
       <label for="floatingPassword">Your Message</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="file" class="form-control" id="floatingInput" name="img">
+      <label for="floatingInput">Upload Image</label>
     </div>
 
     <div style="    display: flex;

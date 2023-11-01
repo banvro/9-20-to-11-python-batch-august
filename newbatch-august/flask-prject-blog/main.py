@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask import redirect
 import mysql.connector
+import os
 
 conn = mysql.connector.connect(host="localhost", username = "root", password="1234", database = "amazon")
 curser = conn.cursor()
@@ -32,7 +33,13 @@ def savedata():
         email = request.form.get("email")
         p_number = request.form.get("number")
         message = request.form.get("msg")
-        curser.execute(f"insert into savemydata values('{fname}', '{email}', '{p_number}', '{message}')")
+        Image = request.files.get("img")
+
+        if Image:
+            Image.save(os.path.join("static/images", Image.filename))
+            img = os.path.join("static/images/", Image.filename)
+
+        curser.execute(f"insert into savemydataa values('{fname}', '{email}', '{p_number}', '{message}', '{img}')")
         conn.commit()
 
         return redirect("/showdata")
@@ -40,7 +47,7 @@ def savedata():
 
 @web.route("/showdata")
 def showdata():
-    curser.execute("select * from savemydata;")
+    curser.execute("select * from savemydataa;")
     data = curser.fetchall()
     # print(data)
     return render_template("showdata.html", alldata = data)
@@ -48,14 +55,14 @@ def showdata():
 
 @web.route("/deletedata/<x>", methods = ["POST"])
 def deletethis(x):
-    curser.execute(f"delete from savemydata where Name = '{x}'")
+    curser.execute(f"delete from savemydataa where Name = '{x}'")
     conn.commit()
     return redirect("/showdata")
 
 
 @web.route("/showupdate/<x>", methods = ["POST"])
 def updatedata(x):
-    curser.execute(f"select * from savemydata where Name = '{x}'")
+    curser.execute(f"select * from savemydataa where Name = '{x}'")
     record = curser.fetchone()
     return render_template("updatedata.html", data = record)
 
@@ -67,7 +74,7 @@ def updatenow(x):
         email = request.form.get("email")
         p_number = request.form.get("number")
         message = request.form.get("msg")
-        curser.execute(f'update savemydata set Name = "{fname}", email = "{email}", Number = "{p_number}", message = "{message}" where Name = "{x}";')
+        curser.execute(f'update savemydataa set Name = "{fname}", email = "{email}", Number = "{p_number}", message = "{message}" where Name = "{x}";')
         conn.commit()
 
         return redirect("/showdata")
