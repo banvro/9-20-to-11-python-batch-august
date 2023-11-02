@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask import redirect
 import mysql.connector
 import os
@@ -8,6 +8,7 @@ curser = conn.cursor()
 
 
 web = Flask(__name__)
+web.secret_key = "this isbdkjsdhvas "
 
 @web.route("/")
 def home():
@@ -41,6 +42,8 @@ def savedata():
 
         curser.execute(f"insert into savemydataa values('{fname}', '{email}', '{p_number}', '{message}', '{img}')")
         conn.commit()
+
+        flash("You data Saved sucessfulyy..!")
 
         return redirect("/showdata")
     
@@ -76,6 +79,8 @@ def updatenow(x):
         message = request.form.get("msg")
         curser.execute(f'update savemydataa set Name = "{fname}", email = "{email}", Number = "{p_number}", message = "{message}" where Name = "{x}";')
         conn.commit()
+
+        flash("Your data updated sucessfully")
 
         return redirect("/showdata")
 

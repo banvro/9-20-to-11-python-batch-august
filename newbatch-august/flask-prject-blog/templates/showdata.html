@@ -2,6 +2,19 @@
 
 {% block body %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Holy guacamole!</strong> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 <div style="padding: 67px;">
   <div class="row">
     {% for data in alldata %}
