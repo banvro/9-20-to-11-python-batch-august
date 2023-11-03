@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, session
 from flask import redirect
 import mysql.connector
 import os
@@ -35,7 +35,7 @@ def savedata():
         p_number = request.form.get("number")
         message = request.form.get("msg")
         Image = request.files.get("img")
-
+        session["username"] = fname
         if Image:
             Image.save(os.path.join("static/images", Image.filename))
             img = os.path.join("static/images/", Image.filename)
@@ -52,8 +52,9 @@ def savedata():
 def showdata():
     curser.execute("select * from savemydataa;")
     data = curser.fetchall()
+    xyz = session.get("username")
     # print(data)
-    return render_template("showdata.html", alldata = data)
+    return render_template("showdata.html", alldata = data, hey = xyz)
 
 
 @web.route("/deletedata/<x>", methods = ["POST"])
