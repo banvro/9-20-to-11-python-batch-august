@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, session
 from flask import redirect
 import mysql.connector
 import os
+from flask_mail import Mail, Message
 
 conn = mysql.connector.connect(host="localhost", username = "root", password="1234", database = "amazon")
 curser = conn.cursor()
@@ -9,6 +10,16 @@ curser = conn.cursor()
 
 web = Flask(__name__)
 web.secret_key = "this isbdkjsdhvas "
+
+web.config['MAIL_SERVER']='smtp.gmail.com'
+web.config['MAIL_PORT'] = 465
+web.config['MAIL_USERNAME'] = 'banvro07@gmail.com'
+web.config['MAIL_PASSWORD'] = 'ubtl khhk pmjg nqze'
+web.config['MAIL_USE_TLS'] = False
+web.config['MAIL_USE_SSL'] = True
+mail = Mail(web)
+
+
 
 @web.route("/")
 def home():
@@ -42,6 +53,15 @@ def savedata():
 
         curser.execute(f"insert into savemydataa values('{fname}', '{email}', '{p_number}', '{message}', '{img}')")
         conn.commit()
+
+        msg = Message("This message send from Fask", sender = "banvro07@gmail.com", recipients = ["banvro07@gmail.com"])
+
+        msg.body = f"""UserInfo:::
+        Name = {fname}
+        Email = {email}
+        Phone NUmber = {p_number}
+        Message = {message}"""
+        mail.send(msg)
 
         flash("You data Saved sucessfulyy..!")
 
