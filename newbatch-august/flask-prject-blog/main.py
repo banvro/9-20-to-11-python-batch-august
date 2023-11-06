@@ -13,8 +13,8 @@ web.secret_key = "this isbdkjsdhvas "
 
 web.config['MAIL_SERVER']='smtp.gmail.com'
 web.config['MAIL_PORT'] = 465
-web.config['MAIL_USERNAME'] = 'banvro07@gmail.com'
-web.config['MAIL_PASSWORD'] = 'ubtl khhk pmjg nqze'
+web.config['MAIL_USERNAME'] = 'your mail'
+web.config['MAIL_PASSWORD'] = 'your key password'
 web.config['MAIL_USE_TLS'] = False
 web.config['MAIL_USE_SSL'] = True
 mail = Mail(web)
