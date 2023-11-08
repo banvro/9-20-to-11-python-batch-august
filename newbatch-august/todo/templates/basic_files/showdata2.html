@@ -1,0 +1,64 @@
+{% extends "basic_files/base2.html" %} {% block abc %}
+<div style="padding: 35px; text-align: center;">
+  
+</div>
+
+<form action="/saveData" method="post">
+
+  <div style="padding-left: 20%; padding-right: 20%;">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" name="title"
+        placeholder="name@example.com">
+      <label for="floatingInput">Title</label>
+    </div>
+    <div class="form-floating">
+      <textarea class="form-control" name="description" cols="60" rows="40"></textarea>
+      <label for="floatingPassword">Description : </label>
+    </div>
+
+    <div style="    display: flex;
+  justify-content: center;
+  padding: 21px;">
+      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+
+    </div>
+  </div>
+</form>
+
+
+<hr>
+<div style=" display: flex;
+  justify-content: center;
+  ">
+<h1>All TO DO </h1>
+</div>
+<div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col=35">Todo Id</th>
+      <th scope="col=35">Title</th>
+      <th scope="col=35">Description</th>
+      <th scope="col=30">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{alldata}}
+    {% for data in alldata %}
+      <td>{{data.id}}</td>
+      <td>{{data.title}}</td>
+      <td>{{data.descrption}}</td>
+      <td>
+      <form action="/deletedata/{{data[0]}}" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+     {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+  {% endblock abc %}
