@@ -42,8 +42,13 @@ def showdata():
     print(data, "xxxxxxxxxxxxxx")
     return render_template("basic_files/showdata2.html",alldata=data)
 
-@web.route("/deletedata/<x>", methods=["POST"])
+@web.route("/deletedata/<int:x>", methods=["POST"])
 def delete(x):
+    zx = TodoSaveData.query.filter(TodoSaveData.id == x).first()
+    zx.title = "this is update title"
+    # db.session.delete(zx)
+    db.session.commit()
+
     return redirect("/showdata")
 
 if __name__=="__main__":
