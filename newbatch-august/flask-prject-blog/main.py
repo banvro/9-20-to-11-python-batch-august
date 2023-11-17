@@ -3,21 +3,33 @@ from flask import redirect
 import mysql.connector
 import os
 from flask_mail import Mail, Message
+from flask_sqlalchemy import SQLAlchemy
 
 conn = mysql.connector.connect(host="localhost", username = "root", password="1234", database = "amazon")
 curser = conn.cursor()
 
 
 web = Flask(__name__)
-web.secret_key = "this isbdkjsdhvas "
 
-web.config['MAIL_SERVER']='smtp.gmail.com'
-web.config['MAIL_PORT'] = 465
-web.config['MAIL_USERNAME'] = 'your mail'
-web.config['MAIL_PASSWORD'] = 'your key password'
-web.config['MAIL_USE_TLS'] = False
-web.config['MAIL_USE_SSL'] = True
-mail = Mail(web)
+web.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blog.db"
+
+db = SQLAlchemy(web)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String)
+
+
+# web.secret_key = "this isbdkjsdhvas "
+
+# web.config['MAIL_SERVER']='smtp.gmail.com'
+# web.config['MAIL_PORT'] = 465
+# web.config['MAIL_USERNAME'] = 'your mail'
+# web.config['MAIL_PASSWORD'] = 'your key password'
+# web.config['MAIL_USE_TLS'] = False
+# web.config['MAIL_USE_SSL'] = True
+# mail = Mail(web)
 
 
 
@@ -54,14 +66,14 @@ def savedata():
         curser.execute(f"insert into savemydataa values('{fname}', '{email}', '{p_number}', '{message}', '{img}')")
         conn.commit()
 
-        msg = Message("This message send from Fask", sender = "banvro07@gmail.com", recipients = ["banvro07@gmail.com"])
+        # msg = Message("This message send from Fask", sender = "banvro07@gmail.com", recipients = ["banvro07@gmail.com"])
 
-        msg.body = f"""UserInfo:::
-        Name = {fname}
-        Email = {email}
-        Phone NUmber = {p_number}
-        Message = {message}"""
-        mail.send(msg)
+        # msg.body = f"""UserInfo:::
+        # Name = {fname}
+        # Email = {email}
+        # Phone NUmber = {p_number}
+        # Message = {message}"""
+        # mail.send(msg)
 
         flash("You data Saved sucessfulyy..!")
 
@@ -76,6 +88,7 @@ def showdata():
     # print(data)
     return render_template("showdata.html", alldata = data, hey = xyz)
 
+# [(), ()]
 
 @web.route("/deletedata/<x>", methods = ["POST"])
 def deletethis(x):
