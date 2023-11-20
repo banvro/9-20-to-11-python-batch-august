@@ -3,23 +3,23 @@
   
 </div>
 
-<form action="/saveData" method="post">
-
+<form action="/updatethis/{{x.id}}" method="post">
+  
   <div style="padding-left: 20%; padding-right: 20%;">
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" name="title"
+      <input type="text" class="form-control" id="floatingInput" name="title" value = {{x.title}}
         placeholder="name@example.com">
       <label for="floatingInput">Title</label>
     </div>
     <div class="form-floating">
-      <textarea class="form-control" name="description" cols="60" rows="40"></textarea>
+      <textarea class="form-control" name="description" cols="60" rows="40">{{x.descrption}}</textarea>
       <label for="floatingPassword">Description : </label>
     </div>
 
     <div style="    display: flex;
   justify-content: center;
   padding: 21px;">
-      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+      <button type="submit" class="btn btn-success btn-lg">Update</button>
 
     </div>
   </div>
@@ -46,7 +46,7 @@
     <tr>
       {{alldata}}
     {% for data in alldata %}
-      <td>{{loop.index}}</td>
+      <td>{{data.id}}</td>
       <td>{{data.title}}</td>
       <td>{{data.descrption}}</td>
       <td style = "display: flex;
