@@ -41,3 +41,8 @@ varx = "i am a string i am data. how are you"
 
 
 
+# helloooooo
+
+# git add .
+# git commit -m "commant"
+# git push
