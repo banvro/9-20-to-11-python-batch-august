@@ -1,0 +1,20 @@
+to create new project:
+    django-admin startproject projectname
+
+
+
+
+to run project:
+
+python manage.py runserver
+
+flask : 127.0.0.1:5000
+
+django : 127.0.0.1:8000
+
+
+migrate : python manage.py migrate
+
+
+
+createsuperuser : python manage.py createsuperuser
