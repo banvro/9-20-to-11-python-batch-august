@@ -22,3 +22,14 @@ migrate : python manage.py migrate
 
 
 createsuperuser : python manage.py createsuperuser
+
+
+
+
+create app in projet:
+
+django-admin startapp user
+
+or
+
+python -m django startapp user
