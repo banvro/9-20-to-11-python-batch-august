@@ -16,3 +16,11 @@ def suaveinfo(request):
         data = SaveDetail(Name = name, Phone_Number = number, Email = email, message = message )
         data.save()
         return redirect("home")
+
+
+
+def showthisdta(request):
+    data = SaveDetail.objects.all()
+    return render(request, "showdata.html", {"mydata" : data})
+
+# ORM 
