@@ -18,7 +18,18 @@
                   <h5 class="card-title">Phone Number  : {{i.Phone_Number}} </h5>
                   <h5 class="card-title">Email  : {{i.Email}} </h5>
                   <p class="card-text">{{i.message}}.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <div style="    display: flex;
+                  justify-content: space-around;">
+    
+                    
+                    <button type="submit" class="btn btn-success">Update</button>
+
+                  <form action="deletethis/{{i.id}}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+
+                  </div>
                 </div>
               </div>
             </div>

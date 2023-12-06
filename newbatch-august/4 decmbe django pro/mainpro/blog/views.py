@@ -15,12 +15,20 @@ def suaveinfo(request):
        
         data = SaveDetail(Name = name, Phone_Number = number, Email = email, message = message )
         data.save()
-        return redirect("home")
+        return redirect("show")
 
-
+ 
 
 def showthisdta(request):
     data = SaveDetail.objects.all()
     return render(request, "showdata.html", {"mydata" : data})
 
 # ORM 
+
+
+def deletethis(request, myid):
+    # print(myid, "xxxxxxxxxxxxxxxxxxxxxxxx")
+    data = SaveDetail.objects.get(id = myid)
+    data.delete()
+
+    return redirect("show")
