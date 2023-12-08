@@ -7,5 +7,9 @@ urlpatterns = [
     path("savedata", views.suaveinfo, name = "suaveinfo"),
     path("showdata", views.showthisdta, name = "show"),
 
+    path("updatedata/<int:x>", views.updatedata, name = "update"),
+
     path("deletethis/<int:myid>", views.deletethis, name = "dlt"),
+
+    path("updatenow/<int:id>", views.updatenow)
 ]

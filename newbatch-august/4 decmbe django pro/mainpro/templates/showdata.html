@@ -22,7 +22,11 @@
                   justify-content: space-around;">
     
                     
+
+                  <form action="updatedata/{{i.id}}" method="post">
+                    {% csrf_token %}
                     <button type="submit" class="btn btn-success">Update</button>
+                  </form>
 
                   <form action="deletethis/{{i.id}}" method="post">
                     {% csrf_token %}

@@ -32,3 +32,31 @@ def deletethis(request, myid):
     data.delete()
 
     return redirect("show")
+
+
+
+def updatedata(request, x):
+    data = SaveDetail.objects.get(id = x)
+    print(data, "xxxxxxxx")
+    return render(request, "updatethisdata.html", {"senddata" : data})
+
+
+def updatenow(request, id):
+    data = SaveDetail.objects.get(id = id)
+
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        number = request.POST.get("number")
+        message = request.POST.get("msg")
+
+        
+        data.Name = name
+        data.Email = email
+        data.Phone_Number = number
+        data.message = message
+
+        data.save()
+
+
+    return redirect("show")
