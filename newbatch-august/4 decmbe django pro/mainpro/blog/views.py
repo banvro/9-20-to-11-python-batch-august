@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from blog.models import SaveDetail
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
@@ -60,3 +61,18 @@ def updatenow(request, id):
 
 
     return redirect("show")
+
+
+
+def signup(request):
+    if request.method == "POST":
+        uname = request.POST.get("Username")
+        fnam = request.POST.get("fullname")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        obj = User.objects.create_user(username = uname, email = email, first_name = fnam, password = password)
+        obj.save()
+
+    return render(request, "auth/signup.html")
+

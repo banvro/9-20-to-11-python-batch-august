@@ -11,5 +11,7 @@ urlpatterns = [
 
     path("deletethis/<int:myid>", views.deletethis, name = "dlt"),
 
-    path("updatenow/<int:id>", views.updatenow)
+    path("updatenow/<int:id>", views.updatenow),
+
+    path("signup", views.signup, name = "singnup")
 ]
