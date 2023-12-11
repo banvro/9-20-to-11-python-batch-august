@@ -7,3 +7,11 @@ def main(request):
 
 def xyz(request):
     return HttpResponse("this is xyz page")
+
+
+def home(request):
+    return render(request, "home.html")
+
+
+def carfun(request):
+    return render(request, "car.html")
