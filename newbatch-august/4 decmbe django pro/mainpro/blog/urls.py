@@ -13,5 +13,7 @@ urlpatterns = [
 
     path("updatenow/<int:id>", views.updatenow),
 
-    path("signup", views.signup, name = "singnup")
+    path("signup", views.signup, name = "singnup"),
+
+    path("login", views.loginnow, name = "login"),
 ]

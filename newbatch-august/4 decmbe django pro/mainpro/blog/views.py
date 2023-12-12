@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from blog.models import SaveDetail
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 # Create your views here.
 
 def home(request):
@@ -76,3 +78,17 @@ def signup(request):
 
     return render(request, "auth/signup.html")
 
+
+def loginnow(request):
+    if request.method == "POST":
+        nmae = request.POST.get("usernmae")
+        passs = request.POST.get("password")
+        
+
+        check = authenticate(username = nmae, password = passs)
+
+        if check is not None:
+            login(request, check)
+
+
+    return render(request, "auth/loginnow.html")
