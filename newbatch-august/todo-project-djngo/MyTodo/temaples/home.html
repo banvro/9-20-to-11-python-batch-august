@@ -2,6 +2,9 @@
 
 {% block todoblock %}
 
+
+{% if check == "home" %}
+
 <h3 style="text-align: center; color: red;">MyTodo App</h3>
 
 <form action="savetodo" method="post">
@@ -22,6 +25,30 @@
             
 </form>
 
+{% else %}
+
+
+<h3 style="text-align: center; color: red;">Update Todo</h3>
+
+<form action="/updattodonow/{{todo.id}}" method="post">
+    {% csrf_token %}
+    <div style="padding: 31px; padding-left: 15%; padding-right: 15%;">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" value = "{{todo.title}}" name="title" id="exampleFormControlInput1" placeholder="Enter your Title ..">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Decrition</label>
+            <textarea class="form-control" name="dec" id="exampleFormControlTextarea1" rows="3">{{todo.desc}}</textarea>
+          </div>
+          <div style="text-align: center;">
+            <button type="submit" class="btn btn-outline-danger">Update Todo</button>
+          </div>
+    </div>
+            
+</form>
+
+{% endif %}
 
 <div style="    padding: 19PX;
 padding-left: 9%;
@@ -42,13 +69,25 @@ background-color: red;">
         </thead>
         <tbody>
 
+          {{check}}
         {% for todo in todos %} 
           <tr>
             <th scope="row">{{todo.id}}</th>
             <td>{{todo.title}}</td>
             <td>{{todo.desc}}</td>
             <td>{{todo.added_date}}</td>
-            <td>@mdo</td>
+            <td>
+              <div>
+                <form method="post" action="/deletethistodo/{{todo.id}}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+                <form action="updatetodo/{{todo.id}}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+                </form>
+              </div>
+            </td>
           </tr>
           {% endfor %}
           
