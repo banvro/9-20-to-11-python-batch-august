@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from todo.models import TodoData
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -42,5 +44,38 @@ def updatethisnow(request, myid):
         mytodo.desc = dec
 
         mytodo.save()
+
+    return redirect("home")
+
+
+
+def signupgere(request):
+    if request.method == "POST":
+        usernmae = request.POST.get("username")
+        email = request.POST.get("email")
+        fname = request.POST.get("name")
+        password = request.POST.get("passw")
+
+        userx = User.objects.create_user(username = usernmae, first_name = fname, email = email, password=password)
+        userx.save()
+
+    return redirect("home")
+
+def loginfun(request):
+    if request.method == "POST":
+        usern = request.POST.get("username")
+        passw = request.POST.get("password")
+
+        check = authenticate(username = usern, password = passw)
+
+        if check is not None:
+            login(request, check)
+
+
+    return redirect("home")
+
+
+def logouthere(request):
+    logout(request)
 
     return redirect("home")

@@ -2,50 +2,60 @@
 
 {% block todoblock %}
 
-
 {% if check == "home" %}
 
 <h3 style="text-align: center; color: red;">MyTodo App</h3>
 
 <form action="savetodo" method="post">
-    {% csrf_token %}
-    <div style="padding: 31px; padding-left: 15%; padding-right: 15%;">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Enter your Title ..">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Decrition</label>
-            <textarea class="form-control" name="dec" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-          <div style="text-align: center;">
-            <button type="submit" class="btn btn-outline-danger">Save Todo</button>
-          </div>
+  {% csrf_token %}
+  <div style="padding: 31px; padding-left: 15%; padding-right: 15%;">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" class="form-control" name="title"
+        id="exampleFormControlInput1" placeholder="Enter your Title ..">
     </div>
-            
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Decrition</label>
+      <textarea class="form-control" name="dec" id="exampleFormControlTextarea1"
+        rows="3"></textarea>
+    </div>
+    {% if user.is_authenticated %}
+    <div style="text-align: center;">
+      <button type="submit" class="btn btn-outline-danger">Save Todo</button>
+    </div>
+    {% else %}
+    <div style="text-align: center;">
+      <button type="button" class="btn btn-outline-danger">Please Login First To
+        Add Todos</button>
+    </div>
+    {% endif %}
+  </div>
+
 </form>
 
 {% else %}
 
-
 <h3 style="text-align: center; color: red;">Update Todo</h3>
 
 <form action="/updattodonow/{{todo.id}}" method="post">
-    {% csrf_token %}
-    <div style="padding: 31px; padding-left: 15%; padding-right: 15%;">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" value = "{{todo.title}}" name="title" id="exampleFormControlInput1" placeholder="Enter your Title ..">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Decrition</label>
-            <textarea class="form-control" name="dec" id="exampleFormControlTextarea1" rows="3">{{todo.desc}}</textarea>
-          </div>
-          <div style="text-align: center;">
-            <button type="submit" class="btn btn-outline-danger">Update Todo</button>
-          </div>
+  {% csrf_token %}
+  <div style="padding: 31px; padding-left: 15%; padding-right: 15%;">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" class="form-control" value="{{todo.title}}"
+        name="title" id="exampleFormControlInput1"
+        placeholder="Enter your Title ..">
     </div>
-            
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Decrition</label>
+      <textarea class="form-control" name="dec" id="exampleFormControlTextarea1"
+        rows="3">{{todo.desc}}</textarea>
+    </div>
+    <div style="text-align: center;">
+      <button type="submit" class="btn btn-outline-danger">Update Todo</button>
+    </div>
+  </div>
+
 </form>
 
 {% endif %}
@@ -55,45 +65,157 @@ padding-left: 9%;
 padding-right: 9%;
 background-color: red;">
 
-<h3 style="text-align: center; color: rgb(0, 0, 0);">All Todos</h3>
+  <h3 style="text-align: center; color: rgb(0, 0, 0);">All Todos</h3>
 
-<table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Discrition</th>
-            <th scope="col">Added Date</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Discrition</th>
+        <th scope="col">Added Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
 
-          {{check}}
-        {% for todo in todos %} 
-          <tr>
-            <th scope="row">{{todo.id}}</th>
-            <td>{{todo.title}}</td>
-            <td>{{todo.desc}}</td>
-            <td>{{todo.added_date}}</td>
-            <td>
-              <div>
-                <form method="post" action="/deletethistodo/{{todo.id}}">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                </form>
-                <form action="updatetodo/{{todo.id}}" method="post">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
-                </form>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-          
-        </tbody>
-      </table>
+      {% if user.is_authenticated %}
+      {% for todo in todos %}
+      <tr>
+        <th scope="row">{{todo.id}}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.desc}}</td>
+        <td>{{todo.added_date}}</td>
+        <td>
+          <div>
+            <form method="post" action="/deletethistodo/{{todo.id}}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+            </form>
+            <form action="updatetodo/{{todo.id}}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+
+      {% else %}
+
+    <h2> Please Login to view todos</h2> 
+    
+      {% endif %}
+      
+    </tbody>
+  </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Signup Here</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form method="post" action="signuphere">
+          {% csrf_token %}
+          <div style="padding-left: 12%; padding-right: 12%;
+        padding-top: 17px;">
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username"
+                id="exampleFormControlInput1"
+                placeholder="Enter A unique Username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+              <input type="text" class="form-control" name="name"
+                id="exampleFormControlInput1" placeholder="Enter Your Full Name">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Email</label>
+              <input type="email" class="form-control" name="email"
+                id="exampleFormControlInput1"
+                placeholder="Enter your Email Address">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Password</label>
+              <input type="password" class="form-control" name="passw"
+                id="exampleFormControlInput1" placeholder="Enter your password">
+            </div>
+
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-success">Submit</button>
+
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginmodal" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Login Here</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="loginhere" method="post">
+          {% csrf_token %}
+          <div style="padding-left: 12%; padding-right: 12%;
+        padding-top: 17px;">
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username"
+                id="exampleFormControlInput1"
+                placeholder="Enter A unique Username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password"
+                id="exampleFormControlInput1" placeholder="Enter your password">
+            </div>
+
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-success">Submit</button>
+
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock todoblock %}

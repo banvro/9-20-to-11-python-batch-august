@@ -36,10 +36,23 @@
                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+
+            {% if user.is_authenticated %}
+            <h6 style = "color : red;">Your are Login as : <br> {{request.user}}</h6>
+            <form action = "logouthere" method = "post">
+              {% csrf_token %}
+              <div>
+                <button type="submit" class="btn btn-danger">Logout</button>
+              </div>
             </form>
+
+            {% else %}
+            <div>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">SignUp</button>
+              <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#loginmodal">Login</button>
+            </div>
+            {% endif %}
+
           </div>
         </div>
       </nav>
