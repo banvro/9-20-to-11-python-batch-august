@@ -15,8 +15,11 @@ def savethistodo(request):
     if request.method == "POST":
         title = request.POST.get("title")
         dec = request.POST.get("dec")
+        img = request.FILES.get("myimg")
 
-        mydata = TodoData(title = title, desc = dec)
+        # print(img, "yyyyyyyy")
+
+        mydata = TodoData(title = title, desc = dec, My_Image = img)
         mydata.save()
     return redirect("home")
 
