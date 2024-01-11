@@ -3,6 +3,12 @@
 # pyqt5
 
 import tkinter as tk
+from tkinter import messagebox
+
+def showmsgbox():
+    print("helooooooo")
+    messagebox.showwarning("Data Saved", "Your Data Saved Sucessfully in Database..!")
+    # messagebox.showinfo("Data Saved", "Your Data Saved Sucessfully in Database..!")
 
 window = tk.Tk()
 window.geometry("500x300")
@@ -15,7 +21,7 @@ lbl.pack(fill = "x", padx = 30, pady = 30, ipady = 10, side = "top")
 en = tk.Entry(window, font = ("robort", 20, "italic"))
 en.pack()
 
-btn = tk.Button(window, text = "Submit", font = ("robort", 20, "bold"))
+btn = tk.Button(window, text = "Submit", font = ("robort", 20, "bold"), command = showmsgbox)
 btn.pack(pady = 20)
 
 window.mainloop()
