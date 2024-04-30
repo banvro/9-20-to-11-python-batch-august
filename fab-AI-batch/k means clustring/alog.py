@@ -11,7 +11,7 @@ class MyKMeanssAlgo:
         # 1) decide n cluster
         # 2) init centriod 
         # print(x)
-        for i in range(500):
+        for _ in range(self.max_iter):
             centriod_index = random.sample(range(0, x.shape[0]), self.n_cluster)
 
             self.centriod = x[centriod_index]
@@ -29,11 +29,12 @@ class MyKMeanssAlgo:
             print(type(self.centriod))
             print(type(old_centriod))
             # 5) finish
-            if (old_centriod == self.centriod).all():
+            # if (old_centriod == self.centriod).all():
+            if np.allclose(old_centriod, self.centriod):
                 print("heyyyyyy")
                 break
         
-            return cluster_group
+        return cluster_group
 
         # print(cluster_group)
     
